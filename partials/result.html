@@ -1,0 +1,51 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-11">
+                <div class="pull-right">
+                    <ul ng-show="!authenticated">
+                        <li><a class="navbar-login" href="#/login">Login</a></li>
+                    </ul>
+                    <ul ng-show="authenticated" style="position: relative;">
+                        <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
+                        <ul class="mui-dropdown__menu">
+                            <li><a href="#/dashboard">Profile</a></li>
+                            <li><a href="#/cart">Cart</a></li>
+                            <li ng-click="logout();"><a>Logout</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h2><b>InstaCure</b></h2></div>
+            <div class="col-md-8 row">
+                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
+                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<!-- {{result}} -->
+<div class="container-fluid">
+    <div class="row" style="margin-left: 20px; margin-right: 20px;">
+        <div class="mui-panel" style="margin-bottom:1px;">
+            <h1>Showing results for "{{key}}"</h1>
+        </div>
+        <div ng-repeat="c in result" class="product-showcase col-sm-4 col-xs-6 col-md-3 col-lg-2">
+            <div class="image">
+                <img class="img-responsive" src="image/product.jpg">
+            </div>
+            <span><b>{{c.medicineName}}</b></span><br>
+            <span><b>Size:</b>{{c.size}}</span><br>
+            <span><b>Price:</b>&#8377;{{c.price}}</span><br>
+            <div class="row" style="margin: 0px;">
+                <input ng-model="qty" class="text-center col-xs-6" style="height: 40px;" type="" name="">
+                <button class="mui-btn mui-btn--primary col-xs-6 pull-right" style="margin: 0px; height: 40px;" ng-click="addToCart(c.pid,qty)"> Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

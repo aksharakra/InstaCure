@@ -1,0 +1,40 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-11">
+                <div class="pull-right">
+                    <ul style="position: relative;">
+                        <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
+                        <ul class="mui-dropdown__menu">
+                            <li><a href="#/dashboard">Profile</a></li>
+                            <li><a href="#/cart">Cart</a></li>
+                            <li ng-click="logout();"><a>Logout</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h2><b>InstaCure</b></h2></div>
+            <div class="col-md-8 row">
+                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
+                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div ng-repeat="c in cart_data" class="mui-panel col-xs-12" style="margin-bottom: 1px;">
+        <div class="image col-md-5 row">
+            <div class="col-xs-4">
+                <img class="img-responsive" src="image/product.jpg">
+            </div>
+            {{c.medicineName}}
+        </div>
+        {{c.pid}} {{c.quantity}}
+        <button class="btn btn-danger" ng-click="remove(c.pid);">Remove From Cart</button>
+    </div>
+</div>

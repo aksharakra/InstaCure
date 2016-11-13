@@ -1,0 +1,68 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"><h2><b>InstaCure</b></h2></div>
+            <div class="col-md-8 row">
+                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
+                <a href="/#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <span class="col-sm-3"></span>
+            <div class="col-sm-6">
+                <div class="mui-panel">
+                    <legend>
+                        <h2><b>Signup for InstaCure</b></h2>
+                    </legend>
+                    <br/>
+                    <form name="signupForm" role="form">
+                        <div class="form-group"  style="margin: 5px">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="text" name="username" ng-model="signup.username" focus/>
+                                <label for="username">Username</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="password" name="password" ng-model="signup.password" required/>
+                                <label for="password">Password</label>
+                            </div>
+                            <small class="errorMessage" data-ng-show="signupForm.password.$dirty && signupForm.password.$invalid"> Enter Password.</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="password" name="password2" ng-model="signup.password2" password-match="signup.password" required/>
+                                <label for="password2">Confirm Password</label>
+                            </div>
+                            <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required"> Enter password again.</small>
+                            <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.passwordNoMatch && !signupForm.password2.$error.required"> Password do not match.</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="text" ng-model="signup.name" />
+                                <label for="name">Name</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="text" name="phone" ng-model="signup.phone" />
+                                <label for="phone">Phone</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="mui-btn mui-btn--primary mui-btn--raised pull-right" ng-click="signUp(signup)" data-ng-disabled="signupForm.$invalid">Sign Up</button>
+                            <div class="">Already have an account? <a href="#/login">SignIn</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <span class="col-sm-3"></span>
+        </div>
+    </div>
+</div>
+<!-- /.page-content -->

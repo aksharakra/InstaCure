@@ -1,0 +1,80 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-11">
+                <div class="pull-right">
+                    <ul style="position: relative;">
+                        <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
+                        <ul class="mui-dropdown__menu">
+                            <li><a href="#/dashboard">Profile</a></li>
+                            <li><a href="#/cart">Cart</a></li>
+                            <li ng-click="logout();"><a>Logout</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <h2><b>InstaCure</b></h2></div>
+            <div class="col-md-8 row">
+                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
+                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="mui-panel">
+        <ul>
+            <h1>Welcome {{user_data.name}}!</h1>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Name:</b></span>
+                <span class="col-xs-6"> {{user_data.name}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Username:</b></span>
+                <span class="col-xs-6"> {{user_data.id}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Email:</b></span>
+                <span class="col-xs-6"> {{user_data.email}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Phone Number:</b></span>
+                <span class="col-xs-6"> {{user_data.pno}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Gender:</b></span>
+                <span class="col-xs-6"> {{user_data.gender}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Date of Birth:</b></span>
+                <span class="col-xs-6"> {{user_data.dob}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Area:</b></span>
+                <span class="col-xs-6"> {{user_data.area}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Locality:</b></span>
+                <span class="col-xs-6"> {{user_data.locality}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>House Number:</b></span>
+                <span class="col-xs-6"> {{user_data.houseno}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>City:</b></span>
+                <span class="col-xs-6"> {{user_data.city}}</span>
+            </li>
+            <li class="row profile-panel">
+                <span class="col-xs-6"><b>Profile Pic:</b></span>
+                <span class="col-xs-6"> {{user_data.pphoto}}</span>
+            </li>
+        <button class="pull-right mui-btn" style="margin-right: 15px;">Edit</button>
+        </ul>
+    </div>
+</div>

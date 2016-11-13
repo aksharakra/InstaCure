@@ -1,0 +1,44 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"><h2><b>InstaCure</b></h2></div>
+            <div class="col-md-8 row">
+                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
+                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</div>
+<div class="page-content">
+    <div class="container">
+        <div class="row">
+            <span class="col-sm-3"></span>
+            <div class="col-sm-6">
+                <div class="mui-panel">
+                    <i class="icon-coffee green"></i>
+                    <legend>Login to InstaCure</legend>
+                    <form name="loginForm" role="form">
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="text" name="email" ng-model="login.email" required focus>
+                                <label for="email">Username</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="mui-textfield mui-textfield--float-label">
+                                <input type="password" ng-model="login.password" required>
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="mui-btn mui-btn--raised mui-btn--primary pull-right" ng-click="doLogin(login)" data-ng-disabled="loginForm.$invalid">Log In</button>
+                            <div class="">Don't have an account? <a href="#/signup">Signup</a></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <span class="col-sm-3"></span>
+        </div>
+    </div>
+</div>
