@@ -1,2 +1,2 @@
 # InstaCure
-Front end of the website 
+Front end of an e-commerce medical website. 
