@@ -38,11 +38,9 @@
             <div class="image">
                 <img class="img-responsive" src="image/product.jpg">
             </div>
-            <div>
-                <span>{{browse.medicineName}}</span>
-                <span>{{browse.price}}</span>
-                <span>{{browse.description}}</span>
-            </div>
+            <span>{{c.medicineName}}</span>
+            <span>{{c.price}}</span>
+            <span>{{c.description}}</span>
             <div class="row" style="margin: 0px;">
                 <input ng-model="qty" class="text-center col-xs-6" style="height: 40px;" type="" name="">
                 <button class="mui-btn mui-btn--primary col-xs-6 pull-right" style="margin: 0px; height: 40px;" ng-click="addToCart(c.pid,qty)"> Add to Cart</button>

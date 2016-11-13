@@ -49,4 +49,5 @@
 <script src="app/homeCtrl.js"></script>
 <script src="app/chatCtrl.js"></script>
 <script src="app/prescCtrl.js"></script>
+<script src="app/profileCtrl.js"></script>
 </html>

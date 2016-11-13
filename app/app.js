@@ -28,6 +28,11 @@ app.config(['$routeProvider',
                     templateUrl: 'partials/dashboard.html',
                     controller: 'authCtrl'
                 })
+                .when('/edit', {
+                    title: 'Edit Profile',
+                    templateUrl: 'partials/edit_profile.html',
+                    controller: 'profileCtrl'
+                })
                 .when('/cart', {
                     title: 'Cart',
                     templateUrl: 'partials/cart.html',
