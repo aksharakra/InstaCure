@@ -44,82 +44,70 @@
     </div>
 </div>
 <div class="container" id="pro-container">
-    <div class="mui-panel">
-        <h1>Welcome {{user_data.name}}!</h1>
-        <div class="col-sm-4 col-xs-12">
-            <img class="img-responsive" style="box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.2);" src="{{user_data.pphoto}}">
-            <button class="mui-btn navbar-button col-xs-12" type="file" ngf-select="change($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-                <i class="fa fa-camera" aria-hidden="true"></i> Change Profile Pic
-            </button>
-        </div>
-        <ul class="col-sm-8">
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Name:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.name">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Username:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.id">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Email:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="email" ng-model="user_data.email">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Phone Number:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.pno">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Gender:</b></span>
-                <div class="col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="radio" name="gender" ng-model="user_data.gender" value="male" checked> Male
-                    <br>
-                    <input type="radio" name="gender" ng-model="user_data.gender" value="female"> Female
-                    <br>
-                    <input type="radio" name="gender" ng-model="user_data.gender" value="other"> Other
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Date of Birth:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <datepicker date-format="dd-MM-yyyy">
-                        <input ng-model="user_data.dob" type="text"/>
-                    </datepicker>
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Area:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.address.area">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Locality:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.address.locality">
-                </div>
-            </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>House Number:</b></span>
-                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
-                    <input type="text" ng-model="user_data.address.houseno">
-                </div>
-            </li>
-            <li class="row profile-panel">
+    <div class="mui-panel" style="background-color: #FFA500; margin-bottom: 0px; color: #fff;">Confirm Details</div>
+    <div class="mui-panel" style="margin-bottom: 0px">
+        <ul>
+            <li class="row checkout-panel">
                 <span class="col-xs-6"><b>City:</b></span>
                 <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
                     <input type="text" ng-model="user_data.address.city">
                 </div>
             </li>
-            <button class="pull-right mui-btn profile-buttons" ng-click="save();" style="margin-right: 15px;">Save</button>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Area:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.address.area">
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Locality:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.address.locality">
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>House Number:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.address.houseno">
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Phone Number:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.pno">
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Pin Code:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.pcode">
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Delivery Date:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <datepicker date-format="dd-MM-yyyy">
+                        <input ng-model="user_data.ddate" type="text"/>
+                    </datepicker>
+                </div>
+            </li>
+            <li class="row checkout-panel">
+                <span class="col-xs-6"><b>Delivery Time:</b></span>
+                <div class="mui-textfield col-xs-6" style="margin: 0px; padding: 0px;">
+                    <input type="text" ng-model="user_data.dtime">
+                </div>
+            </li>
         </ul>
+    </div>
+    <div class="mui-panel" style="background-color: #FFA500; margin-bottom: 0px; color: #fff;">Link Prescription</div>
+    <div class="mui-panel" style="margin-bottom: 0px">
+        <div style="overflow-x: auto; display: flex">
+            <img ng-repeat="c in presc" class="img-responsive prescription" ng-click="pppid(c);" src="{{c.file}}">
+        </div>
+        <div class="row selected_prescription">
+            <span class="col-xs-6">Prescription: </span>
+            <img class="col-xs-2" src="{{file}}">
+        </div>
+        <button class="pull-right mui-btn profile-buttons" ng-click="order();" style="margin-right: 15px;">Confirm Order</button>
     </div>
 </div>

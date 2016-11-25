@@ -43,50 +43,18 @@
         </div>
     </div>
 </div>
-<div class="container" ng-hide="cart_data.length>0" id="pro-container">
-    <div class="mui-panel text-center" style="padding-top: 100px; padding-bottom: 100px;">
-        <span class="center">
-            There is no item in the cart</span>
-        <br>
-        <a href="#/home" style="background-color: #c42c5d" class="mui-btn mui-btn--primary">Continue Shopping</a>
-        </span>
-    </div>
-</div>
-<div class="container" ng-show="cart_data.length>0" id="pro-container">
-    <div class="mui-panel" style="margin-bottom: 0px; padding: 0px;">
-        <table class="table table-bordered" style="margin-bottom: 0px;">
-            <thead>
-                <tr>
-                    <th><span class="col-xs-4"></span>Medicine Name</th>
-                    <th>Qty.</th>
-                    <th>Price</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="c in cart_data">
-                    <td class="col-xs-5">
-                        <img class="img-responsive col-xs-4" src="image/product.jpg">
-                        <span>{{c.medicineName}}</span>
-                        <a class="pull-right" ng-click="remove(c.pid);" style="bottom: 0; ">Remove</a>
-                    </td>
-                    <td class="col-xs-1">
-                        <span>{{c.quantity}}</span>
-                    </td>
-                    <td class="col-xs-1">
-                        <span>Rs. {{c.price}}</span>
-                    </td>
-                    <td class="col-xs-1">
-                        <span>Rs. {{c.price * c.quantity}}</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mui-panel" style="margin-bottom: 0px; background-color: rgba(243, 243, 243, 0.99)">
-        <b class="pull-right">Amount Payable: Rs. {{payable}}</b>
-    </div>
-    <div class="mui-panel">
-        <a href="#/checkout" class="pull-right mui-btn profile-buttons">Place Order</a>
+<div class="container" id="pro-container">
+    <div class="row mui-panel" style="margin-bottom: 0px; padding: 0px;">
+        <div class="container">
+            <h1 class="margin-bottom: 20px;">My Orders</h1>
+            <div ng-repeat="c in cart_data">
+                <div class="mui-panel" style="margin-bottom: 0px; background-color: #F8F8F8"><span class="mui-btn profile-buttons" style="margin: 0px;">{{c.oid}}</span></div>
+                <div class="mui-panel">
+                    <div ng-repeat="d in c.products">
+                        {{d.medicineName}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

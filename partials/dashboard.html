@@ -6,11 +6,17 @@
                     <ul ng-show="!authenticated">
                         <li><a class="navbar-login" href="#/login">Login</a></li>
                     </ul>
-                    <ul ng-show="authenticated" style="position: relative;">
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline">
+                        <li><a href="#/cart" style="color: white; text-decoration: none">Blog</a></li>
+                        <li><a href="#/orders" style="color: white; text-decoration: none">My Orders</a></li>
+                        <li><a href="#/cart" style="color: white; text-decoration: none"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ({{length}})</a></li>
+                    </ul>
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline; margin-left: -40px">
                         <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
-                        <ul class="mui-dropdown__menu">
+                        <ul class="mui-dropdown__menu pull-right">
                             <li><a href="#/dashboard">Profile</a></li>
                             <li><a href="#/cart">Cart</a></li>
+                            <li><a href="#/orders">Orders</a></li>
                             <li><a href="#/prescription">Prescriptions</a></li>
                             <li ng-click="logout();"><a>Logout</a></li>
                         </ul>
@@ -20,10 +26,15 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                <h2><b>InstaCure</b></h2></div>
+                <img ng-click="home();" src="image/SiteIcon.png" class="img-responsive InstaCure-logo">
+            </div>
             <div class="col-xs-10 col-md-8 row navbar-custom-search">
-                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
-                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+                <input type="" name="" placeholder="search for medicines" ng-model="key.name" class="col-xs-3 navbar-input">
+                <input type="" name="" placeholder="salt name" ng-model="key.salt" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="manufacturer" ng-model="key.manufacturer" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="min price" ng-model="key.minprice" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="max price" ng-model="key.maxprice" class="col-xs-2 navbar-input">
+                <button ng-click="search(key);" style="padding: 0px;" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></button>
             </div>
             <div class="col-xs-2">
                 <button class="mui-btn navbar-button" type="file" ngf-select="upload($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
@@ -32,55 +43,57 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container" id="pro-container">
     <div class="mui-panel">
-        <ul>
-            <h1>Welcome {{user_data.name}}!</h1>
+        <h1>Welcome {{user_data.name}}!</h1>
+        <div class="col-sm-4 col-xs-12">
+            <img class="img-responsive" style="box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.2);" src="{{user_data.pphoto}}">
+            <button class="mui-btn navbar-button col-xs-12" type="file" ngf-select="change($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                <i class="fa fa-camera" aria-hidden="true"></i> Change Profile Pic
+            </button>
+        </div>
+        <ul class="col-sm-8 col-xs-12">
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Name:</b></span>
-                <span class="col-xs-6"> {{user_data.name}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.name}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Username:</b></span>
-                <span class="col-xs-6"> {{user_data.id}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.id}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Email:</b></span>
-                <span class="col-xs-6"> {{user_data.email}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.email}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Phone Number:</b></span>
-                <span class="col-xs-6"> {{user_data.pno}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.pno}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Gender:</b></span>
-                <span class="col-xs-6"> {{user_data.gender}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.gender}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Date of Birth:</b></span>
-                <span class="col-xs-6"> {{user_data.dob}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.dob}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Area:</b></span>
-                <span class="col-xs-6"> {{user_data.area}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.address.area}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>Locality:</b></span>
-                <span class="col-xs-6"> {{user_data.locality}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.address.locality}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>House Number:</b></span>
-                <span class="col-xs-6"> {{user_data.houseno}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.address.houseno}}</span>
             </li>
             <li class="row profile-panel">
                 <span class="col-xs-6"><b>City:</b></span>
-                <span class="col-xs-6"> {{user_data.city}}</span>
+                <span class="col-xs-6" style="overflow-wrap: break-word;"> {{user_data.address.city}}</span>
             </li>
-            <li class="row profile-panel">
-                <span class="col-xs-6"><b>Profile Pic:</b></span>
-                <span class="col-xs-6"> {{user_data.pphoto}}</span>
-            </li>
-        <a href="#/edit" class="pull-right mui-btn" style="margin-right: 15px;">Edit</a>
+            <a href="#/edit" class="pull-right mui-btn profile-buttons" style="margin-right: 15px;">Edit</a>
         </ul>
     </div>
 </div>

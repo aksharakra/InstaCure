@@ -1,3 +1,48 @@
+<div class="mui-panel navbar-custom">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <ul ng-show="!authenticated">
+                        <li><a class="navbar-login" href="#/login">Login</a></li>
+                    </ul>
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline">
+                        <li><a href="#/cart" style="color: white; text-decoration: none">Blog</a></li>
+                        <li><a href="#/orders" style="color: white; text-decoration: none">My Orders</a></li>
+                        <li><a href="#/cart" style="color: white; text-decoration: none"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ({{length}})</a></li>
+                    </ul>
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline; margin-left: -40px">
+                        <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
+                        <ul class="mui-dropdown__menu pull-right">
+                            <li><a href="#/dashboard">Profile</a></li>
+                            <li><a href="#/cart">Cart</a></li>
+                            <li><a href="#/orders">Orders</a></li>
+                            <li><a href="#/prescription">Prescriptions</a></li>
+                            <li ng-click="logout();"><a>Logout</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <img ng-click="home();" src="image/SiteIcon.png" class="img-responsive InstaCure-logo">
+            </div>
+            <div class="col-xs-10 col-md-8 row navbar-custom-search">
+                <input type="" name="" placeholder="search for medicines" ng-model="key.name" class="col-xs-3 navbar-input">
+                <input type="" name="" placeholder="salt name" ng-model="key.salt" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="manufacturer" ng-model="key.manufacturer" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="min price" ng-model="key.minprice" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="max price" ng-model="key.maxprice" class="col-xs-2 navbar-input">
+                <button ng-click="search(key);" style="padding: 0px;" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-xs-2">
+                <button class="mui-btn navbar-button" type="file" ngf-select="upload($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                    <i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
 	<h1>Chat Display Here</h1>
 	{{chat}}

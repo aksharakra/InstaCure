@@ -1,5 +1,6 @@
-app.controller('prescCtrl', function($scope, $rootScope, $location, $cookies, $http, Data, Upload) {
+app.controller('ordersCtrl', function($scope, $rootScope, $location, Upload, $cookies, $http, Data) {
     $scope.prescription = '';
+    $scope.payable = 0;
     $scope.key = {};
     $scope.length = 0;
     $scope.fetchCartValue = function() {
@@ -35,7 +36,6 @@ app.controller('prescCtrl', function($scope, $rootScope, $location, $cookies, $h
 
             file.upload.then(function(response) {
                 Data.toast('success', 'Prescription uploaded.')
-                $scope.fetchData();
                 $timeout(function() {
                     file.result = response.data;
                 });
@@ -57,15 +57,37 @@ app.controller('prescCtrl', function($scope, $rootScope, $location, $cookies, $h
             });
             $http({
                     method: 'post',
-                    url: 'http://54.179.136.115/Curifiq/recieve_prescription.php',
+                    url: 'http://54.179.136.115/Curifiq/myorders.php',
                     data: data1,
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })
                 .success(function(data) {
-                    $scope.presc = data;
+                    $scope.cart_data = data;
+                    var total = 0;
+                    for (var i = 0; i < $scope.cart_data.length; i++) {
+                        var product = $scope.cart_data[i];
+                        total += (product.price * product.quantity);
+                    }
+                    $scope.payable = total;
                 });
         }
         $scope.fetchData();
+        $scope.remove = function(pid) {
+            var data2 = $.param({
+                uname: $rootScope.email,
+                pid: pid
+            });
+            $http({
+                    method: 'post',
+                    url: 'http://54.179.136.115/Curifiq/remove_from_cart.php',
+                    data: data2,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data) {
+                    Data.toast('success', 'Removed from cart.')
+                    $scope.fetchData();
+                });
+        }
         $scope.logout = function() {
             $cookies.userName = '';
             Data.toast("success", "Successfuly Logged Out");

@@ -1,11 +1,17 @@
 app.controller('cartCtrl', function($scope, $rootScope, $location, Upload, $cookies, $http, Data) {
     $scope.prescription = '';
+    $scope.payable = 0;
+    $scope.key = {};
+    $scope.length = 0;
+    $scope.search = function(key) {
+        $location.path('search').search(key);
+    }
     $scope.upload = function(file) {
         if ($rootScope.authenticated == false) {
             $location.path('login');
         } else {
             file.upload = Upload.upload({
-                url: 'http://52.77.213.144/Curifiq/add_prescription.php',
+                url: 'http://54.179.136.115/Curifiq/add_prescription.php',
                 method: 'POST',
                 sendFieldsAs: 'form',
                 fields: { uname: $cookies.userName, prescription: file },
@@ -34,12 +40,19 @@ app.controller('cartCtrl', function($scope, $rootScope, $location, Upload, $cook
             });
             $http({
                     method: 'post',
-                    url: 'http://52.77.213.144/Curifiq/cart.php',
+                    url: 'http://54.179.136.115/Curifiq/cart.php',
                     data: data1,
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })
                 .success(function(data) {
                     $scope.cart_data = data;
+                    $scope.length = data.length;
+                    var total = 0;
+                    for (var i = 0; i < $scope.cart_data.length; i++) {
+                        var product = $scope.cart_data[i];
+                        total += (product.price * product.quantity);
+                    }
+                    $scope.payable = total;
                 });
         }
         $scope.fetchData();
@@ -50,7 +63,7 @@ app.controller('cartCtrl', function($scope, $rootScope, $location, Upload, $cook
             });
             $http({
                     method: 'post',
-                    url: 'http://52.77.213.144/Curifiq/remove_from_cart.php',
+                    url: 'http://54.179.136.115/Curifiq/remove_from_cart.php',
                     data: data2,
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })

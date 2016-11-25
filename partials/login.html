@@ -1,12 +1,19 @@
 <div class="mui-panel navbar-custom">
     <div class="container">
         <div class="row">
-            <div class="col-md-2"><h2><b>InstaCure</b></h2></div>
-            <div class="col-md-8 row">
-                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
-                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+            <div class="col-md-2">
+                <img ng-click="home();" src="image/SiteIcon.png" class="img-responsive InstaCure-logo">
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-xs-10 col-md-8 row navbar-custom-search">
+                <input type="" name="" placeholder="search for medicines" ng-model="key.name" class="col-xs-3 navbar-input">
+                <input type="" name="" placeholder="salt name" ng-model="key.salt" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="manufacturer" ng-model="key.manufacturer" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="min price" ng-model="key.minprice" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="max price" ng-model="key.maxprice" class="col-xs-2 navbar-input">
+                <button ng-click="search(key);" style="padding: 0px;" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-xs-2">
+            </div>
         </div>
     </div>
 </div>

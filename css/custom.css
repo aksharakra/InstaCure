@@ -93,7 +93,7 @@ a:hover {
     color: #000;
 }
 
-#upload-photo{
+#upload-photo {
     opacity: 0;
     position: absolute;
     z-index: -1;
@@ -113,8 +113,8 @@ a:hover {
     line-height: 32px;
     height: 38px;
     border-radius: 0px;
-    background-color: orange;
-    border-color: orange;
+    background-color: #FFA500;
+    border-color: #FFA500;
     color: white;
 }
 
@@ -152,7 +152,7 @@ a:hover {
     box-shadow: inset 0 0 2px #000000;
 }
 
-.counter{
+.counter {
     cursor: pointer;
 }
 
@@ -161,13 +161,144 @@ a:hover {
     margin-right: 15px;
     border-radius: 0;
     background-color: #FFF;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16),0 0 2px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
 }
+
 .profile-panel:hover {
     padding: 15px;
     margin-right: 15px;
     border-radius: 0;
     background-color: #f8f8f8;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.16),0 0 2px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .16), 0 0 2px 0 rgba(0, 0, 0, .12);
 }
 
+.profile-buttons {
+    background-color: #FFA500;
+    border-color: #FFA500;
+    color: #fff;
+}
+
+.profile-buttons:focus,
+.profile-buttons:hover {
+    background-color: #FFA500;
+    color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .12), 0 2px 2px rgba(0, 0, 0, .2);
+}
+
+@media (max-width: 1200px) {
+    #pro-container {
+        width: 97.5%;
+        /*this gives it the precise width to match the Bootstrap defaults*/
+    }
+}
+
+.checkout-panel {
+    padding: 15px;
+    margin-right: 15px;
+    border-radius: 0;
+    background-color: #FFF
+}
+
+.prescription {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 5px;
+}
+
+.prescription:hover,
+.prescription:focus,
+.prescription:visited,
+.prescription:active {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 5px;
+    border: 1px solid black;
+}
+
+.selected_prescription {
+    min-height: 200px;
+    margin-top: 20px;
+}
+
+._720kb-datepicker-calendar-header:nth-child(odd) {
+    background: #ffa500;
+}
+
+._720kb-datepicker-calendar-header:nth-child(even) {
+    background: rgba(255, 165, 0, 0.68);
+}
+
+._720kb-datepicker-calendar-days-header {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2% 0 2%;
+    background: rgba(255, 165, 0, 0.23);
+    border-bottom: 1px solid rgba(255, 165, 0, 0.23);
+}
+
+.navbar-after-login>li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.InstaCure-logo {
+    margin-top: 16px;
+}
+
+.InstaCure-logo:hover {
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.pagination>.active>a,
+.pagination>.active>span,
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    z-index: 2;
+    color: #fff;
+    background-color: #c42c5d;
+    border-color: #c42c5d;
+    cursor: default;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    line-height: 1.42857143;
+    text-decoration: none;
+    color: #c42c5d;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-left: -1px;
+}
+
+.pagination>li>a:hover,
+.pagination>li>span:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus {
+    color: #c42c5d;
+    background-color: #eee;
+    border-color: #ddd;
+}
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    min-height: 100%;
+}
+.slide-animation{
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 100px;
+}
+footer{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

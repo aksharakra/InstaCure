@@ -1,4 +1,4 @@
-app.controller('profileCtrl', function($scope, $rootScope, $routeParams, $location, $cookies, $http, Data, Upload) {
+app.controller('checkoutCtrl', function($scope, $rootScope, $routeParams, $location, $cookies, $http, Data, Upload) {
     $scope.key = {};
     $scope.length = 0;
     $scope.fetchCartValue = function() {
@@ -22,6 +22,12 @@ app.controller('profileCtrl', function($scope, $rootScope, $routeParams, $locati
         $location.path('search').search(key);
     }
     if ($rootScope.authenticated == true) {
+        $scope.pid = '';
+        $scope.file = '';
+        $scope.pppid = function(c){
+            $scope.file = c.file;
+            $scope.pid = c.pid;
+        }
         $scope.fetchData = function() {
             var data1 = $.param({
                 uname: $rootScope.email
@@ -40,49 +46,44 @@ app.controller('profileCtrl', function($scope, $rootScope, $routeParams, $locati
                 });
         }
         $scope.fetchData();
-        $scope.save = function() {
+        $scope.fetchPresc = function() {
             var data1 = $.param({
-                uname: $rootScope.email,
-                email: $scope.user_data.email,
-                pno: $scope.user_data.pno,
-                gender: $scope.user_data.gender,
-                dob: $scope.user_data.dob,
-                area: $scope.user_data.address.area,
-                locality: $scope.user_data.address.locality,
-                houseno: $scope.user_data.address.houseno,
-                city: $scope.user_data.address.city,
+                uname: $rootScope.email
             });
             $http({
                     method: 'post',
-                    url: 'http://54.179.136.115/Curifiq/edit_user_profile.php',
+                    url: 'http://54.179.136.115/Curifiq/recieve_prescription.php',
                     data: data1,
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 })
                 .success(function(data) {
-                    $scope.user_data = data;
-                    $location.path('dashboard');
+                    $scope.presc = data;
                 });
         }
-        $scope.change = function(file) {
-            file.upload = Upload.upload({
-                url: 'http://54.179.136.115/Curifiq/edit_user_profile.php',
-                method: 'POST',
-                sendFieldsAs: 'form',
-                fields: { uname: $cookies.userName, pphoto: file },
+        $scope.fetchPresc();
+        $scope.order = function() {
+            var data1 = $.param({
+                uname: $rootScope.email,
+                pno: $scope.user_data.pno,
+                area: $scope.user_data.address.area,
+                locality: $scope.user_data.address.locality,
+                houseno: $scope.user_data.address.houseno,
+                city: $scope.user_data.address.city,
+                pcode: $scope.user_data.pcode,
+                ddate: $scope.user_data.ddate,
+                dtime: $scope.user_data.dtime,
+                pid: $scope.pid
             });
-
-            file.upload.then(function(response) {
-                Data.toast('success', 'Photo changed.')
-                $scope.fetchData();
-                $timeout(function() {
-                    file.result = response.data;
+            $http({
+                    method: 'post',
+                    url: 'http://54.179.136.115/Curifiq/checkout.php',
+                    data: data1,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data) {
+                    Data.toast('success', 'Order Placed Successfully.');
+                    $location.path('home');
                 });
-            }, function(response) {
-                if (response.status > 0)
-                    $scope.errorMsg = response.status + ': ' + response.data;
-            }, function(evt) {
-                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            });
         }
         $scope.login = {};
         $scope.signup = {};
@@ -95,7 +96,7 @@ app.controller('profileCtrl', function($scope, $rootScope, $routeParams, $locati
             });
 
             file.upload.then(function(response) {
-                Data.toast('success', 'Prescription uploaded.')
+                $scope.fetchPresc();
                 $timeout(function() {
                     file.result = response.data;
                 });
@@ -112,5 +113,7 @@ app.controller('profileCtrl', function($scope, $rootScope, $routeParams, $locati
             $location.path('home');
             $rootScope.authenticated = false;
         }
+    } else{
+        $location.path('login');
     }
 });

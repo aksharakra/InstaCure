@@ -1,50 +1,88 @@
 <div class="mui-panel navbar-custom">
     <div class="container">
         <div class="row">
-            <div class="col-xs-11">
+            <div class="col-xs-12">
                 <div class="pull-right">
                     <ul ng-show="!authenticated">
                         <li><a class="navbar-login" href="#/login">Login</a></li>
                     </ul>
-                    <ul ng-show="authenticated" style="position: relative;">
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline">
+                        <li><a href="#/cart" style="color: white; text-decoration: none">Blog</a></li>
+                        <li><a href="#/orders" style="color: white; text-decoration: none">My Orders</a></li>
+                        <li><a href="#/cart" style="color: white; text-decoration: none"><i class="fa fa-shopping-cart" aria-hidden="true"></i> ({{length}})</a></li>
+                    </ul>
+                    <ul class="navbar-after-login" ng-show="authenticated" style="position: relative; display: inline; margin-left: -40px">
                         <li class="navbar-user" data-mui-toggle="dropdown">Hi {{email}}! <i class="fa fa-caret-down"></i></li>
-                        <ul class="mui-dropdown__menu">
+                        <ul class="mui-dropdown__menu pull-right">
                             <li><a href="#/dashboard">Profile</a></li>
                             <li><a href="#/cart">Cart</a></li>
+                            <li><a href="#/orders">Orders</a></li>
+                            <li><a href="#/prescription">Prescriptions</a></li>
                             <li ng-click="logout();"><a>Logout</a></li>
                         </ul>
                     </ul>
                 </div>
             </div>
-            <div class="col-xs-1"></div>
         </div>
         <div class="row">
             <div class="col-md-2">
-                <h2><b>InstaCure</b></h2></div>
-            <div class="col-md-8 row">
-                <input type="" name="" placeholder="search for medicines" ng-model="key" class="col-xs-10 navbar-input">
-                <a href="#/result/{{key}}" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></a>
+                <img ng-click="home();" src="image/SiteIcon.png" class="img-responsive InstaCure-logo">
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-xs-10 col-md-8 row navbar-custom-search">
+                <input type="" name="" placeholder="search for medicines" ng-model="key.name" class="col-xs-3 navbar-input">
+                <input type="" name="" placeholder="salt name" ng-model="key.salt" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="manufacturer" ng-model="key.manufacturer" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="min price" ng-model="key.minprice" class="col-xs-2 navbar-input">
+                <input type="" name="" placeholder="max price" ng-model="key.maxprice" class="col-xs-2 navbar-input">
+                <button ng-click="search(key);" style="padding: 0px;" class="col-xs-1 mui-btn navbar-button"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-xs-2">
+                <button class="mui-btn navbar-button" type="file" ngf-select="upload($file, $invalidFiles)" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+                    <i class="fa fa-upload" aria-hidden="true"></i> Upload</button>
+            </div>
         </div>
     </div>
 </div>
 <!-- {{result}} -->
 <div class="container-fluid">
     <div class="row" style="margin-left: 20px; margin-right: 20px;">
-        <div class="mui-panel" style="margin-bottom:1px;">
-            <h1>Showing results for "{{key}}"</h1>
-        </div>
-        <div ng-repeat="c in result" class="product-showcase col-sm-4 col-xs-6 col-md-3 col-lg-2">
-            <div class="image">
-                <img class="img-responsive" src="image/product.jpg">
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <ul class="pagination pull-right">
+                    <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+                    <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                        <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+                    </li>
+                    <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+                </ul>
             </div>
-            <span><b>{{c.medicineName}}</b></span><br>
-            <span><b>Size:</b>{{c.size}}</span><br>
-            <span><b>Price:</b>&#8377;{{c.price}}</span><br>
-            <div class="row" style="margin: 0px;">
-                <input ng-model="qty" class="text-center col-xs-6" style="height: 40px;" type="" name="">
-                <button class="mui-btn mui-btn--primary col-xs-6 pull-right" style="margin: 0px; height: 40px;" ng-click="addToCart(c.pid,qty)"> Add to Cart</button>
+            <div ng-repeat="c in result | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage" class="col-xs-12 col-sm-6 col-md-3">
+                <div class="mui-panel" style="padding-bottom: 0px; padding-right: 0px; padding-left: 0px;">
+                    <div class="row">
+                        <div class="image col-xs-4">
+                            <img class="img-responsive" src="image/product.jpg">
+                        </div>
+                        <div class="col-xs-8">
+                            <span>{{c.medicineName}}</span>
+                            <br>
+                            <span>&#8377;{{c.price}}</span>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row" style="margin: 0px;">
+                        <input ng-model="qty" class="text-center col-xs-6" style="height: 40px;" type="" name="">
+                        <button class="mui-btn mui-btn--primary col-xs-6 pull-right" style="margin: 0px; height: 40px; background-color: #C42C5D" ng-click="addToCart(c.pid,qty)"><i class="fa fa-cart-plus fa-2x" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <ul class="pagination pull-right">
+                    <li><a href="" ng-click="pagination.prevPage()">&laquo;</a></li>
+                    <li ng-repeat="n in [] | range: pagination.numPages" ng-class="{active: n == pagination.page}">
+                        <a href="" ng-click="pagination.toPageId(n)">{{n + 1}}</a>
+                    </li>
+                    <li><a href="" ng-click="pagination.nextPage()">&raquo;</a></li>
+                </ul>
             </div>
         </div>
     </div>

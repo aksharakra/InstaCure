@@ -1,28 +1,50 @@
 app.controller('authCtrl', function($scope, $rootScope, $routeParams, $location, $cookies, $http, Data, Upload) {
     $scope.isCollapsed = false;
+    $scope.key = {};
+    $scope.search = function(key){
+        $location.path('search').search(key);
+    }
+    $scope.length = 0;
+    $scope.fetchData = function() {
+        if ($rootScope.authenticated == true) {
+            var data1 = $.param({
+                uname: $rootScope.email
+            });
+            $http({
+                    method: 'post',
+                    url: 'http://54.179.136.115/Curifiq/cart.php',
+                    data: data1,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data) {
+                    $scope.length = data.length;
+                });
+        }
+    }
+    $scope.fetchData();
     if ($rootScope.authenticated == true) {
         $location.path('dashboard');
-        var data1 = $.param({
-            uname: $rootScope.email
-        });
-        $http({
-                method: 'post',
-                url: 'http://52.77.213.144/Curifiq/user_profile.php',
-                data: data1,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-            })
-            .success(function(data) {
-                $scope.user_data = data;
+        $scope.fetchData = function() {
+            var data1 = $.param({
+                uname: $rootScope.email
             });
-    }
-    $scope.login = {};
-    $scope.signup = {};
-    $scope.upload = function(file) {
-        if ($rootScope.authenticated == false) {
-            $location.path('login');
-        } else {
+            $http({
+                    method: 'post',
+                    url: 'http://54.179.136.115/Curifiq/user_profile.php',
+                    data: data1,
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                })
+                .success(function(data) {
+                    $scope.user_data = data;
+                    if(data.pphoto == undefined){
+                        $scope.user_data.pphoto = 'image/default.jpg';
+                    }
+                });
+        }
+        $scope.fetchData();
+        $scope.upload = function(file) {
             file.upload = Upload.upload({
-                url: 'http://52.77.213.144/Curifiq/add_prescription.php',
+                url: 'http://54.179.136.115/Curifiq/add_prescription.php',
                 method: 'POST',
                 sendFieldsAs: 'form',
                 fields: { uname: $cookies.userName, prescription: file },
@@ -40,7 +62,30 @@ app.controller('authCtrl', function($scope, $rootScope, $routeParams, $location,
                 file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
             });
         }
+        $scope.change = function(file) {
+            file.upload = Upload.upload({
+                url: 'http://54.179.136.115/Curifiq/edit_user_profile.php',
+                method: 'POST',
+                sendFieldsAs: 'form',
+                fields: { uname: $cookies.userName, pphoto: file },
+            });
+
+            file.upload.then(function(response) {
+                Data.toast('success', 'Photo changed.')
+                $scope.fetchData();
+                $timeout(function() {
+                    file.result = response.data;
+                });
+            }, function(response) {
+                if (response.status > 0)
+                    $scope.errorMsg = response.status + ': ' + response.data;
+            }, function(evt) {
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+            });
+        }
     }
+    $scope.login = {};
+    $scope.signup = {};
     $scope.doLogin = function(customer) {
         var data1 = $.param({
             uname: customer.email,
@@ -48,7 +93,7 @@ app.controller('authCtrl', function($scope, $rootScope, $routeParams, $location,
         });
         $http({
                 method: 'post',
-                url: 'http://52.77.213.144/Curifiq/user_authentication.php',
+                url: 'http://54.179.136.115/Curifiq/user_authentication.php',
                 data: data1,
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })
@@ -70,7 +115,7 @@ app.controller('authCtrl', function($scope, $rootScope, $routeParams, $location,
         });
         $http({
                 method: 'post',
-                url: 'http://52.77.213.144/Curifiq/new_user.php',
+                url: 'http://54.179.136.115/Curifiq/new_user.php',
                 data: data1,
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
             })

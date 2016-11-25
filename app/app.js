@@ -1,60 +1,64 @@
-var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster', 'ngCookies', 'ngFileUpload', 'base64']);
+var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster', 'ngCookies', 'ngFileUpload', 'angular-google-analytics', '720kb.datepicker', 'simplePagination']);
+app.config(['AnalyticsProvider', function (AnalyticsProvider) {
+   AnalyticsProvider.setAccount('UA-66101416-4');
+}]).run(['Analytics', function(Analytics) { }]);
 
 app.config(['$routeProvider',
         function($routeProvider) {
             $routeProvider.
             when('/login', {
-                    title: 'Login',
                     templateUrl: 'partials/login.html',
                     controller: 'authCtrl'
                 })
                 .when('/logout', {
-                    title: 'Logout',
                     templateUrl: 'partials/login.html',
                     controller: 'logoutCtrl'
                 })
                 .when('/signup', {
-                    title: 'Signup',
                     templateUrl: 'partials/signup.html',
                     controller: 'authCtrl'
                 })
                 .when('/home', {
-                    title: 'Home',
                     templateUrl: 'partials/home.html',
                     controller: 'homeCtrl'
                 })
                 .when('/dashboard', {
-                    title: 'Dashboard',
                     templateUrl: 'partials/dashboard.html',
                     controller: 'authCtrl'
                 })
                 .when('/edit', {
-                    title: 'Edit Profile',
                     templateUrl: 'partials/edit_profile.html',
                     controller: 'profileCtrl'
                 })
                 .when('/cart', {
-                    title: 'Cart',
                     templateUrl: 'partials/cart.html',
                     controller: 'cartCtrl'
                 })
+                .when('/orders', {
+                    templateUrl: 'partials/orders.html',
+                    controller: 'ordersCtrl'
+                })
+                .when('/checkout', {
+                    templateUrl: 'partials/checkout.html',
+                    controller: 'checkoutCtrl'
+                })
                 .when('/prescription', {
-                    title: 'Prescription',
                     templateUrl: 'partials/presc.html',
                     controller: 'prescCtrl'
                 })
                 .when('/chat', {
-                    title: 'Chat',
                     templateUrl: 'partials/chat.html',
                     controller: 'chatCtrl'
                 })
                 .when('/result/:query', {
-                    title: 'Search Result',
+                    templateUrl: 'partials/result.html',
+                    controller: 'resultCtrl'
+                })
+                .when('/search', {
                     templateUrl: 'partials/result.html',
                     controller: 'resultCtrl'
                 })
                 .when('/', {
-                    title: 'Home',
                     templateUrl: 'partials/home.html',
                     controller: 'homeCtrl'
                 })
@@ -64,6 +68,9 @@ app.config(['$routeProvider',
         }
     ])
     .run(function($rootScope, $location, $cookies, Data) {
+        $rootScope.home = function(){
+            $location.path('home');
+        }
         $rootScope.$on("$routeChangeStart", function(event, next, current) {
             $rootScope.authenticated = false;
             var a = $cookies.userName;
@@ -72,7 +79,7 @@ app.config(['$routeProvider',
                 $rootScope.email = a;
             } else {
                 var nextUrl = next.$$route.originalPath;
-                if (nextUrl == '/signup' || nextUrl == '/login' || nextUrl == '/result/:query' || nextUrl == '/home') {
+                if (nextUrl == '/signup' || nextUrl == '/login' || nextUrl == '/result/:query' || nextUrl == '/home' || nextUrl == '/search') {
 
                 } else {
                     $location.path("/login");
